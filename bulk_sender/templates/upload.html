@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Contacts</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            min-height: 100vh;
+            margin: 0;
+            background-color: #222;
+            color: #eee;
+        }
+
+        .card {
+            background-color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 500px;
+            /* margin: 0 auto;  Removed as justify-content: center on body handles this now */
+        }
+
+        h2 {
+            text-align: center;
+            color: #5cb85c; /* Green title */
+            margin-bottom: 20px;
+        }
+
+        /* Styles for form elements (similar to previous responses) */
+        label { display: block; margin-bottom: 5px; }
+        input, button { margin-bottom: 15px; padding: 8px; width: calc(100% - 16px); }
+        /* ... other form element styles as needed */
+
+        {% comment %} Added error style {% endcomment %}
+        .errorlist {
+            color:red;
+            list-style-type: none;
+            padding: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">  <!-- The container centers the content.  -->
+        <div class="card">  <!-- Card provides a visual container for the form. -->
+            <h2>📤 Upload Contact Sheet</h2>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.non_field_errors }}  <!-- Display form-level errors-->
+                {% for field in form %}
+                    <div class="field-wrapper">  <!-- Wrap each field in a div -->
+                        <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                        {{ field }}
+                        {{ field.errors }} <!-- Display field-specific errors-->
+
+                    </div>
+                {% endfor %}
+
+
+
+                <button type="submit">Upload & Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

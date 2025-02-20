@@ -62,13 +62,13 @@ def upload_file(request):
         if form.is_valid():
             uploaded_file = form.save()
             file_path = uploaded_file.file.path
+            custom_message = form.cleaned_data['message']  # Get user input message
 
             numbers, names = load_contacts(file_path)
-            message = "Hello {name}, this is a test message from Django automation."
 
             driver = setup_driver()
             if driver:
-                send_message(driver, numbers, names, message)
+                send_message(driver, numbers, names, custom_message)
                 driver.quit()
 
             os.remove(file_path)  # Clean up uploaded file after processing

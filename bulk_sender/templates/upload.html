@@ -55,21 +55,20 @@
             <h2>📤 Upload Contact Sheet</h2>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-
-                {{ form.non_field_errors }}  <!-- Display form-level errors-->
-                {% for field in form %}
-                    <div class="field-wrapper">  <!-- Wrap each field in a div -->
-                        <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
-                        {{ field }}
-                        {{ field.errors }} <!-- Display field-specific errors-->
-
-                    </div>
-                {% endfor %}
-
-
-
+            
+                {{ form.non_field_errors }}  <!-- Display form-level errors -->
+                
+                <label for="{{ form.file.id_for_label }}">Upload CSV File:</label>
+                {{ form.file }}
+                {{ form.file.errors }}
+            
+                <label for="{{ form.message.id_for_label }}">Enter Your Message:</label>
+                {{ form.message }}
+                {{ form.message.errors }}
+            
                 <button type="submit">Upload & Send</button>
             </form>
+            
         </div>
     </div>
 </body>
